@@ -1,1 +1,20 @@
+'''
+Problem statement
+Write a query to identify the number of duplicates in "sales_transaction" table.
+Also, create a separate table containing the unique values and remove the the original table from the databases and replace the name of the new table with the original name.
+'''
+select transactionID, count(*) from Sales_transaction
+group by transactionID
+having count(*)>1;
 
+create table Sales_transaction_Duplicate
+ as select distinct * from Sales_transaction;
+
+
+drop table Sales_transaction;
+
+
+alter table Sales_transaction_Duplicate
+rename as Sales_transaction;
+
+select * from Sales_transaction;
